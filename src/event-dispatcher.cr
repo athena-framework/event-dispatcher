@@ -1,4 +1,4 @@
-require "./event-dispatcher/**"
+require "./event-dispatcher/event_dispatcher"
 
 # Convenience alias to make referencing `Athena::EventDispatcher` types easier.
 alias AED = Athena::EventDispatcher
@@ -53,31 +53,43 @@ module Athena::EventDispatcher
   # end
   # ```
   annotation EventHandler; end
+end
 
-  # Creates a listener for the provided *event* with the provided *handler*.
-  #
-  # The macro *handler* block implicitly yields `event` and `dispatcher`.
-  #
-  # ```
-  # handler = AED.create_handler(SampleEvent) do
-  #   # Do something with the event.
-  #   event.some_method
-  #
-  #   # A reference to the `Athena::EventDispatcher::EventDispatcherInterface` is also provided.
-  #   dispatcher.dispatch FakeEvent.new
-  #
-  #   # The handler *MUST* return `nil`.
-  #   nil
-  # end
-  #
-  # # Add the handler as a listener on the `SampleEvent` event.
-  # dispatcher.add_listener SampleEvent, handler
-  # ```
-  #
-  # NOTE: The *handler* block must return `nil`.
-  macro create_handler(event, &handler)
-    ->(event : AED::Event, dispatcher : AED::EventDispatcherInterface) do
-      ->(event : RequestEvent, dispatcher : AED::EventDispatcherInterface) {{handler}}.call event.as({{event}}), dispatcher
-    end
+class ExceptionEvent < AED::Event
+  getter exception
+
+  def initialize(@exception : Exception); end
+end
+
+class RequestEvent < AED::Event
+  getter body
+
+  def initialize(@body : String); end
+end
+
+# class FooEvent < AED::Event
+# end
+
+struct ExceptionListener < AED::Listener
+  @[AED::EventHandler]
+  def on_exception(event : ExceptionEvent, dispatcher : AED::EventDispatcherInterface) : Nil
+    pp "Listened on #{event.exception}"
   end
 end
+
+struct SomeOtherListener < AED::Listener
+  @[AED::EventHandler]
+  def on_exception(event : ExceptionEvent, dispatcher : AED::EventDispatcherInterface) : Nil
+    pp "Also listened on #{event.exception}"
+  end
+
+  @[AED::EventHandler]
+  def on_request(event : RequestEvent, dispatcher : AED::EventDispatcherInterface) : Nil
+    pp "New request #{event}"
+    pp dispatcher
+  end
+end
+
+dispatcher = AED::EventDispatcher.new
+
+dispatcher.dispatch RequestEvent.new("data")

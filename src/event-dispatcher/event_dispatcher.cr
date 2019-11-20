@@ -22,6 +22,7 @@ class Athena::EventDispatcher::EventDispatcher < Athena::EventDispatcher::EventD
 
       # Iterate over event classes to "register" them with the events hash
       {% for event in Event.all_subclasses %}
+        {% raise "Event '#{event.name}' cannot be generic" if event.type_vars.size >= 1 %}
         {% unless event.abstract? %}
           # Initialize each event to an empty array with a default size of the number of total listeners
           # TODO: Remove gsub once crystal-lang/crystal#8458 is released

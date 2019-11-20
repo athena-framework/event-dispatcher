@@ -8,6 +8,6 @@ require "./stoppable_event"
 # Can be inherited from to include information about the event.
 #
 # TODO: Add example
-abstract class Athena::EventDispatcher::Event
+class Athena::EventDispatcher::Event
   include Athena::EventDispatcher::StoppableEvent
 end
