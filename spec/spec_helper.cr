@@ -1,2 +1,2 @@
 require "spec"
-require "../src/event_dispatcher"
+require "../src/event-dispatcher"
