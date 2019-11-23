@@ -7,52 +7,85 @@ end
 class FakeEvent < AED::Event
 end
 
-struct TestListener < AED::Listener
-  @[AED::EventHandler]
-  def listen(event : TestEvent, dispatcher : AED::EventDispatcherInterface) : Nil
-    event.value += 1
+class NoListenerEvent < AED::Event
+end
+
+struct OtherTestListener < AED::Listener
+  def self.subscribed_events
+    {
+      TestEvent => 12,
+    }
   end
 
-  @[AED::EventHandler]
-  def single_arg(event : TestEvent, dispatcher : AED::EventDispatcherInterface) : Nil
+  def call(event : TestEvent, dispatcher : AED::EventDispatcherInterface) : Nil
+    event.value += 1
+  end
+end
+
+struct TestListener < AED::Listener
+  def self.subscribed_events
+    {
+      TestEvent => 0,
+      FakeEvent => 4,
+    }
+  end
+
+  def call(event : TestEvent, dispatcher : AED::EventDispatcherInterface) : Nil
     event.value += 2
+  end
+
+  def call(event : FakeEvent, dispatcher : AED::EventDispatcherInterface) : Nil
   end
 end
 
 describe AED::EventDispatcher do
   describe "#add_listener" do
-    it "should add the provided listener" do
-      dispatcher = AED::EventDispatcher.new
+    describe Proc do
+      it "should add the provided proc as a listener" do
+        dispatcher = AED::EventDispatcher.new [] of AED::Listener
 
-      dispatcher.has_listeners?(FakeEvent).should be_false
+        dispatcher.has_listeners?(FakeEvent).should be_false
 
-      handler = AED.create_handler(FakeEvent) { }
+        listener = AED.create_handler(FakeEvent) { }
 
-      dispatcher.add_listener FakeEvent, handler
+        dispatcher.add_listener FakeEvent, listener
 
-      dispatcher.has_listeners?(FakeEvent).should be_true
+        dispatcher.has_listeners?(FakeEvent).should be_true
+      end
+    end
+
+    describe AED::Listener do
+      it "should add the provided listener" do
+        dispatcher = AED::EventDispatcher.new [] of AED::Listener
+
+        dispatcher.has_listeners?(TestEvent).should be_false
+
+        listener = TestListener.new
+
+        dispatcher.add_listener TestEvent, listener
+
+        dispatcher.has_listeners?(TestEvent).should be_true
+      end
     end
   end
 
   describe "#dispatch" do
     it "should pass the event to all listeners" do
-      dispatcher = AED::EventDispatcher.new
-
       event = TestEvent.new
 
-      dispatcher.dispatch event
+      AED::EventDispatcher.new.dispatch event
 
       event.value.should eq 3
     end
   end
 
-  describe "#get_listeners" do
+  describe "#listeners" do
     describe :event do
       describe "that has listeners" do
-        it "should return an array of procs" do
+        it "should return an array of Listeners" do
           dispatcher = AED::EventDispatcher.new
 
-          listeners = dispatcher.get_listeners(TestEvent)
+          listeners = dispatcher.listeners(TestEvent)
 
           event = TestEvent.new
 
@@ -65,14 +98,14 @@ describe AED::EventDispatcher do
 
       describe "that doesn't have any listeners" do
         it "should return an empty array" do
-          AED::EventDispatcher.new.get_listeners(FakeEvent).should be_empty
+          AED::EventDispatcher.new.listeners(NoListenerEvent).should be_empty
         end
       end
     end
 
     describe :no_event do
-      it "should return an array of procs" do
-        AED::EventDispatcher.new.get_listeners.size.should eq 2
+      it "should return an array of listeners" do
+        AED::EventDispatcher.new.listeners.size.should eq 3
       end
     end
   end
@@ -87,7 +120,7 @@ describe AED::EventDispatcher do
 
       describe "and there are none listening" do
         it "should return false" do
-          AED::EventDispatcher.new.has_listeners?(FakeEvent).should be_false
+          AED::EventDispatcher.new.has_listeners?(NoListenerEvent).should be_false
         end
       end
     end
@@ -101,18 +134,67 @@ describe AED::EventDispatcher do
     end
   end
 
-  pending "#get_listener_priority" do
+  describe "#listener_priority" do
+    describe "that exists" do
+      it "should return the listener priority of the event" do
+        AED::EventDispatcher.new.listener_priority(FakeEvent, TestListener).should eq 4
+      end
+    end
+
+    describe "that doesn't have any listeners" do
+      it "should return nil" do
+        AED::EventDispatcher.new.listener_priority(NoListenerEvent, TestListener).should be_nil
+      end
+    end
+
+    describe "where a listener isn't listening on that event" do
+      it "should return nil" do
+        AED::EventDispatcher.new.listener_priority(FakeEvent, OtherTestListener).should be_nil
+      end
+    end
   end
 
   describe "#remove_listener" do
-    it "should remove the listener" do
-      dispatcher = AED::EventDispatcher.new
+    describe AED::Listener.class do
+      it "should remove the listeners of the given type off the event" do
+        dispatcher = AED::EventDispatcher.new [TestListener.new]
 
-      dispatcher.has_listeners?(TestEvent).should be_true
+        dispatcher.has_listeners?(TestEvent).should be_true
 
-      dispatcher.remove_listener TestEvent, TestListener
+        dispatcher.remove_listener TestEvent, TestListener
 
-      dispatcher.has_listeners?(TestEvent).should be_false
+        dispatcher.has_listeners?(TestEvent).should be_false
+      end
+    end
+
+    describe Proc do
+      it "should remove the listeners procs off the given event" do
+        listener = AED.create_handler(FakeEvent) { }
+
+        dispatcher = AED::EventDispatcher.new [] of AED::Listener
+
+        dispatcher.add_listener FakeEvent, listener
+
+        dispatcher.has_listeners?(FakeEvent).should be_true
+
+        dispatcher.remove_listener FakeEvent, listener
+
+        dispatcher.has_listeners?(FakeEvent).should be_false
+      end
+    end
+
+    describe AED::Listener do
+      it "should remove the listeners based on a listener instance" do
+        listener = TestListener.new
+
+        dispatcher = AED::EventDispatcher.new [listener]
+
+        dispatcher.has_listeners?(TestEvent).should be_true
+
+        dispatcher.remove_listener TestEvent, listener
+
+        dispatcher.has_listeners?(TestEvent).should be_false
+      end
     end
   end
 end

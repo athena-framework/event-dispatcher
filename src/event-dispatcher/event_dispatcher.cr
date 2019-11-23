@@ -3,75 +3,66 @@ require "./event"
 require "./listener"
 
 class Athena::EventDispatcher::EventDispatcher < Athena::EventDispatcher::EventDispatcherInterface
-  # :nodoc:
-  # Used internally to store event listener handlers and metadata related to it.
-  private record Callable, listener : Listener.class, handler : Proc(Event, EventDispatcherInterface, Nil), priority : Int32 = 0 do
-    delegate :call, to: @handler
-  end
+  # Mapping of `Event` types to `EventListener` listening on that event.
+  @events : Hash(Event.class, Array(EventListener))
 
-  @events : Hash(Event.class, Array(Callable))
+  # Keep track of which events have been sorted so that listener arrays can be sorted only when needed.
+  @sorted : Set(Event.class) = Set(Event.class).new
 
-  # Instantiates `self`, building out the hash of events at compile time.
-  def initialize
-    # Work around for https://github.com/crystal-lang/crystal/issues/7975.
-    {{@type}}
+  # Initializes `self` with the provided *listeners*.
+  #
+  # This overload is mainly intended for DI or to manually
+  # configure the listeners that should be used.
+  def initialize(listeners : Array(Listener))
+    # Initialize the event_hash, with a default size of the number of event subclasses. Add one to account for `Event` itself.
+    @events = Hash(Event.class, Array(EventListener)).new {{Event.all_subclasses.size + 1}} { raise "Bug: Accessed missing event type" }
 
-    {% begin %}
-      # Initialize the event_hash, with a default size of the number of event subclasses. Add one to account for Event itself.
-      @events = Hash(Event.class, Array(Callable)).new {{Event.all_subclasses.size + 1}} { raise "Bug: Accessed" }
-
-      # Iterate over event classes to "register" them with the events hash
-      {% for event in Event.all_subclasses %}
-        {% raise "Event '#{event.name}' cannot be generic" if event.type_vars.size >= 1 %}
-        {% unless event.abstract? %}
-          # Initialize each event to an empty array with a default size of the number of total listeners
-          # TODO: Remove gsub once crystal-lang/crystal#8458 is released
-          @events[{{event.name.gsub(/\(.*\)/, "")}}] = Array(Callable).new {{Listener.all_subclasses.size}}
-        {% end %}
-      {% end %}
-
-      # Iterate over each listener class
-      {% for listener, idx in Listener.subclasses %}
-
-        # Instantiate the listener class
-        %listener{idx} = {{listener.id}}.new.as({{listener.id}})
-
-        # Iterate over the event handlers of the listener
-        {% for handler in listener.methods.select { |m| m.annotation(EventHandler) } %}
-          {% raise "Event handler #{listener}##{handler.name} must only have at most two arguments" if handler.args.size > 2 %}
-          {% event = handler.args.first.restriction %}
-          {% raise "Event handler #{listener}##{handler.name}'s first argument must be restricted to an `Event` instance." if !event || !(event.resolve <= Event) %}
-          {% raise "Event handler #{listener}##{handler.name}'s second argument must be restricted to an `EventDispatcherInterface` instance." if handler.args.[1].restriction.resolve != EventDispatcherInterface %}
-
-          # Add each event handler action to the event_hash.  Events are keyed by the handler's argument.
-          (@events[{{event}}] ||= [] of Callable) << Callable.new listener: {{listener.id}}, handler: ->(event : Event, dispatcher : EventDispatcherInterface) do
-            ->%listener{idx}.{{handler.name.id}}({{event}}, EventDispatcherInterface).call event.as({{event}}), dispatcher
-          end
-        {% end %}
+    # Iterate over event classes to "register" them with the events hash
+    {% for event in Event.all_subclasses %}
+      {% raise "Event '#{event.name}' cannot be generic" if event.type_vars.size >= 1 %}
+      {% unless event.abstract? %}
+        # Initialize each event to an empty array with a default size of the number of total listeners
+        @events[{{event.id}}] = Array(EventListener).new {{Listener.all_subclasses.size}}
       {% end %}
     {% end %}
+
+    listeners.each do |listener|
+      listener.class.subscribed_events.each do |event, priority|
+        @events[event] << EventListener.new listener, priority
+      end
+    end
+  end
+
+  def self.new
+    new {{AED::Listener.subclasses.map { |listener| "#{listener.id}.new".id }}}
   end
 
   # :inherit:
-  def add_listener(event : Event.class, handler : Proc(Event, EventDispatcherInterface, Nil), priority : Int32 = 0) : Nil
-    @events[event] << Callable.new listener: Listener, handler: handler
+  def add_listener(event : Event.class, listener : EventListenerType, priority : Int32 = 0) : Nil
+    @events[event] << EventListener.new listener, priority
   end
 
   # :inherit:
   def dispatch(event : Event) : Nil
-    @events[event.class].each &.call event, self
+    listeners(event.class).each &.call event, self
   end
 
   # :inherit:
-  def get_listeners(event : Event.class | Nil = nil) : Array(Proc(Event, EventDispatcherInterface, Nil))
-    return @events[event].map(&.handler) if event
+  def listeners(event : Event.class | Nil = nil) : Array(EventListener)
+    if event
+      sort(event) unless @sorted.includes? event
 
-    @events.values.flatten.map &.handler
+      return @events[event]
+    end
+
+    @events.values.flatten
   end
 
   # :inherit:
-  def get_listener_priority(event : Event.class, listener : Listener.class) : Int32
-    @events[event].find(&.listener.==(listener)).try &.priority
+  def listener_priority(event : Event.class, listener : Listener.class) : Int32?
+    return nil unless has_listeners? event
+
+    @events[event].find(&.listener.class.==(listener)).try &.priority
   end
 
   # :inherit:
@@ -83,6 +74,15 @@ class Athena::EventDispatcher::EventDispatcher < Athena::EventDispatcher::EventD
 
   # :inherit:
   def remove_listener(event : Event.class, listener : Listener.class) : Nil
-    @events[event].reject! &.listener.==(listener)
+    @events[event].reject! &.listener.class.==(listener)
+  end
+
+  # :inherit:
+  def remove_listener(event : Event.class, listener : EventListenerType) : Nil
+    @events[event].reject! &.==(listener)
+  end
+
+  private def sort(event : Event.class) : Nil
+    @events[event].sort_by!(&.priority).reverse!
   end
 end

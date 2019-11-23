@@ -3,4 +3,6 @@
 # Listeners are registered by inheriting from this class.
 # An event can be handled by annotating an instance method with `AED::EventHandler`.
 # See the annotation definition for more details.
-abstract struct Athena::EventDispatcher::Listener; end
+abstract struct Athena::EventDispatcher::Listener
+  def call(event : Event, dispatcher : EventDispatcherInterface) : Nil; end
+end
