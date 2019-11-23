@@ -2,6 +2,8 @@ require "./spec_helper"
 
 class TestEvent < AED::Event
   property value : Int32 = 0
+
+  property? should_stop_propagation : Bool = false
 end
 
 class FakeEvent < AED::Event
@@ -18,6 +20,8 @@ struct OtherTestListener < AED::Listener
   end
 
   def call(event : TestEvent, dispatcher : AED::EventDispatcherInterface) : Nil
+    event.stop_propagation if event.should_stop_propagation?
+
     event.value += 1
   end
 end
@@ -76,6 +80,15 @@ describe AED::EventDispatcher do
       AED::EventDispatcher.new.dispatch event
 
       event.value.should eq 3
+    end
+
+    it "should stop calling listeners if the event propagation is stopped" do
+      event = TestEvent.new
+      event.should_stop_propagation = true
+
+      AED::EventDispatcher.new.dispatch event
+
+      event.value.should eq 1
     end
   end
 

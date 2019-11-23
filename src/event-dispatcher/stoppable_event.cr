@@ -7,7 +7,9 @@ module Athena::EventDispatcher::StoppableEvent
   @propatation_stopped : Bool = false
 
   # If future event listeners should be executed.
-  getter? propagate : Bool = true
+  def propagate? : Bool
+    !@propatation_stopped
+  end
 
   # Prevent future listeners from executing once
   # any listener calls `#stop_propagation` on `self`.

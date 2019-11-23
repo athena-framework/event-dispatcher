@@ -44,7 +44,11 @@ class Athena::EventDispatcher::EventDispatcher < Athena::EventDispatcher::EventD
 
   # :inherit:
   def dispatch(event : Event) : Nil
-    listeners(event.class).each &.call event, self
+    listeners(event.class).each do |listener|
+      return if event.is_a?(StoppableEvent) && !event.propagate?
+
+      listener.call event, self
+    end
   end
 
   # :inherit:
