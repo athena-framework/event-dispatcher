@@ -50,7 +50,7 @@ describe AED::EventDispatcher do
 
         dispatcher.has_listeners?(FakeEvent).should be_false
 
-        listener = AED.create_handler(FakeEvent) { }
+        listener = AED.create_listener(FakeEvent) { }
 
         dispatcher.add_listener FakeEvent, listener
 
@@ -114,11 +114,72 @@ describe AED::EventDispatcher do
           AED::EventDispatcher.new.listeners(NoListenerEvent).should be_empty
         end
       end
+
+      describe "when a new listener is added" do
+        describe Proc do
+          it "should resort the listeners" do
+            dispatcher = AED::EventDispatcher.new
+
+            listener = AED.create_listener(TestEvent) { event.value = 14 }
+
+            dispatcher.add_listener TestEvent, listener, 99
+
+            listeners = dispatcher.listeners(TestEvent)
+
+            event = TestEvent.new
+
+            listeners.size.should eq 3
+            listeners.first.call(event, dispatcher)
+
+            event.value.should eq 14
+          end
+        end
+
+        describe AED::Listener do
+          it "should resort the listeners" do
+            dispatcher = AED::EventDispatcher.new
+
+            listener = TestListener.new
+
+            dispatcher.add_listener TestEvent, listener, 99
+
+            listeners = dispatcher.listeners(TestEvent)
+
+            event = TestEvent.new
+
+            listeners.size.should eq 3
+            listeners.first.call(event, dispatcher)
+
+            event.value.should eq 2
+          end
+        end
+      end
     end
 
     describe :no_event do
       it "should return an array of listeners" do
         AED::EventDispatcher.new.listeners.size.should eq 3
+      end
+
+      describe "when a new listener is added" do
+        describe Proc do
+          it "should resort the listeners" do
+            dispatcher = AED::EventDispatcher.new
+
+            listener = AED.create_listener(TestEvent) { event.value = 14 }
+
+            dispatcher.add_listener TestEvent, listener, 99
+
+            listeners = dispatcher.listeners
+
+            event = TestEvent.new
+
+            listeners.size.should eq 4
+            listeners.first.call(event, dispatcher)
+
+            event.value.should eq 14
+          end
+        end
       end
     end
   end
@@ -182,7 +243,7 @@ describe AED::EventDispatcher do
 
     describe Proc do
       it "should remove the listeners procs off the given event" do
-        listener = AED.create_handler(FakeEvent) { }
+        listener = AED.create_listener(FakeEvent) { }
 
         dispatcher = AED::EventDispatcher.new [] of AED::Listener
 

@@ -42,6 +42,7 @@ class Athena::EventDispatcher::EventDispatcher < Athena::EventDispatcher::EventD
   # :inherit:
   def add_listener(event : AED::Event.class, listener : AED::EventListenerType, priority : Int32 = 0) : Nil
     @events[event] << AED::EventListener.new listener, priority
+    @sorted.delete event
   end
 
   # :inherit:
@@ -59,6 +60,10 @@ class Athena::EventDispatcher::EventDispatcher < Athena::EventDispatcher::EventD
       sort(event) unless @sorted.includes? event
 
       return @events[event]
+    end
+
+    @events.each do |ev, _listeners|
+      sort(ev) unless @sorted.includes? event
     end
 
     @events.values.flatten

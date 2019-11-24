@@ -54,26 +54,24 @@ module Athena::EventDispatcher
     def initialize(@listener : EventListenerType, @priority : Int32 = 0); end
   end
 
-  # Creates a listener for the provided *event* with the provided *handler*.  class ExceptionEvent < AED::Event
+  # Creates a listener for the provided *event*.  The macros block is used as the listener.
   #
   # The macro *handler* block implicitly yields `event` and `dispatcher`.
   #
   # ```
-  # handler = AED.create_handler(SampleEvent) do
+  # listener = AED.create_listener(SampleEvent) do
   #   # Do something with the event.
   #   event.some_method
   #
-  #   # A reference to the `Athena::EventDispatcher::EventDispatcherInterface` is also provided.
+  #   # A reference to the `AED::EventDispatcherInterface` is also provided.
   #   dispatcher.dispatch FakeEvent.new
-  #
-  #   # The handler *MUST* return `nil`.
-  #   nil
   # end
-  #
-  # NOTE: The *handler* block must return `nil`.
-  macro create_handler(event, &handler)
-    ->(event : AED::Event, dispatcher : AED::EventDispatcherInterface) do
-      ->(event : {{event}}, dispatcher : AED::EventDispatcherInterface) {{handler}}.call event.as({{event}}), dispatcher
+  # ```
+  macro create_listener(event, &)
+    Proc(AED::Event, AED::EventDispatcherInterface, Nil).new do |event, dispatcher|
+      Proc({{event.id}}, AED::EventDispatcherInterface, Nil).new do |event, dispatcher|
+        {{handler.body}}
+      end.call event.as({{event}}), dispatcher
     end
   end
 end
