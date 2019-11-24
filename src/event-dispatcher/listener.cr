@@ -31,6 +31,14 @@
 # end
 # ```
 abstract struct Athena::EventDispatcher::Listener
+  # Returns the `AED::Event`s that `self` is listening on, along with
+  # the listener priority of each event.
+  #
+  # Children should overide this with the events it should listen on.
+  def self.subscribed_events : AED::SubscribedEvents
+    AED::SubscribedEvents.new
+  end
+
   # Example method for listening on a specific *event*.  Children can define multiple of these,
   # assuming each one listens on a different `AED::Event` type.
   #

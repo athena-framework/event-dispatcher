@@ -10,7 +10,7 @@ require "./stoppable_event"
 # ```
 # # Define a custom event
 # class ExceptionEvent < AED::Event
-#   property exception : Exception
+#   getter exception : Exception
 #
 #   def initialize(@exception : Exception); end
 # end
