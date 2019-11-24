@@ -13,8 +13,8 @@ class NoListenerEvent < AED::Event
 end
 
 struct OtherTestListener < AED::Listener
-  def self.subscribed_events
-    {
+  def self.subscribed_events : AED::SubscribedEvents
+    AED::SubscribedEvents{
       TestEvent => 12,
     }
   end
@@ -27,8 +27,8 @@ struct OtherTestListener < AED::Listener
 end
 
 struct TestListener < AED::Listener
-  def self.subscribed_events
-    {
+  def self.subscribed_events : AED::SubscribedEvents
+    AED::SubscribedEvents{
       TestEvent => 0,
       FakeEvent => 4,
     }
