@@ -16,7 +16,7 @@ A [Mediator](https://en.wikipedia.org/wiki/Mediator_pattern) and [Observer](http
 
 ## Documentation
 
-Everything is documented in the [API Docs](https://blacksmoke16.github.io/athena-framework/event-dispatcher/Athena/EventDispatcher.html).
+Everything is documented in the [API Docs](https://athena-framework.github.io/event-dispatcher/Athena/EventDispatcher.html).
 
 ## Contributing
 
