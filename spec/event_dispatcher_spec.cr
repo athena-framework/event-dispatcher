@@ -184,7 +184,7 @@ describe AED::EventDispatcher do
     end
   end
 
-  describe "#has_listeners" do
+  describe "#has_listeners?" do
     describe :event do
       describe "and there are some listening" do
         it "should return true" do
@@ -203,6 +203,12 @@ describe AED::EventDispatcher do
       describe "and there are some listening" do
         it "should return true" do
           AED::EventDispatcher.new.has_listeners?.should be_true
+        end
+      end
+
+      describe "and there are some listening" do
+        it "should return false" do
+          AED::EventDispatcher.new([] of AED::Listener).has_listeners?.should be_false
         end
       end
     end
