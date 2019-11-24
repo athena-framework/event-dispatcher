@@ -28,4 +28,4 @@ Everything is documented in the [API Docs](https://blacksmoke16.github.io/athena
 
 ## Contributors
 
-- [Blacksmoke16](https://github.com/your-github-user) - creator and maintainer
+- [Blacksmoke16](https://github.com/blacksmoke16) - creator and maintainer
