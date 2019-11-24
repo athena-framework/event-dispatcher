@@ -70,7 +70,7 @@ module Athena::EventDispatcher
   macro create_listener(event, &)
     Proc(AED::Event, AED::EventDispatcherInterface, Nil).new do |event, dispatcher|
       Proc({{event.id}}, AED::EventDispatcherInterface, Nil).new do |event, dispatcher|
-        {{handler.body}}
+        {{yield}}
       end.call event.as({{event}}), dispatcher
     end
   end
