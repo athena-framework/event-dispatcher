@@ -2,7 +2,9 @@ require "./event_dispatcher_interface"
 require "./event"
 require "./listener"
 
-class Athena::EventDispatcher::EventDispatcher < Athena::EventDispatcher::EventDispatcherInterface
+class Athena::EventDispatcher::EventDispatcher
+  include Athena::EventDispatcher::EventDispatcherInterface
+
   # Mapping of `Event` types to `EventListener` listening on that event.
   @events : Hash(Event.class, Array(EventListener))
 

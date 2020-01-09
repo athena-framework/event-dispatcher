@@ -1,4 +1,4 @@
-require "./event-dispatcher/event_dispatcher"
+require "./event_dispatcher"
 
 # Convenience alias to make referencing `Athena::EventDispatcher` types easier.
 alias AED = Athena::EventDispatcher
@@ -9,7 +9,7 @@ alias AED = Athena::EventDispatcher
 # `Athena::EventDispatcher` or, `AED` for short, allows defining instance methods on `Listener` structs (observers) that will be executed
 # when an `Event` is dispatched via the `EventDispatcher` (mediator).
 #
-# All events are registered with the `EventDispatcher` at compile time.  While the recommended usage involves using
+# All events are registered with an `EventDispatcher` at compile time.  While the recommended usage involves using
 # listener structs, it is also possible to add/remove event handlers dynamically at runtime.  The `EventDispatcher` has two constructors;
 # one that supports manual or DI initialization, while the other auto registers listeners at compile time via macros.
 #
@@ -108,7 +108,7 @@ module Athena::EventDispatcher
 
   # Creates a listener for the provided *event*.  The macro's block is used as the listener.
   #
-  # The macro *handler* block implicitly yields `event` and `dispatcher`.
+  # The macro *block* implicitly yields `event` and `dispatcher`.
   #
   # ```
   # listener = AED.create_listener(SampleEvent) do

@@ -1,4 +1,4 @@
-name: event-dispatcher
+name: athena-event_dispatcher
 
 version: 0.1.0
 
@@ -19,4 +19,4 @@ authors:
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba
-    version: ~> 0.10.0
+    version: ~> 0.11.0
