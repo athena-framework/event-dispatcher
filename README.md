@@ -1,4 +1,6 @@
 # Event Dispatcher
+[![Build Status](https://img.shields.io/github/workflow/status/athena-framework/event-dispatcher/CI)
+[![Latest release](https://img.shields.io/github/release/athena-framework/event-dispatcher.svg?style=flat-square)](https://github.com/athena-framework/event-dispatcher/releases)
 
 A [Mediator](https://en.wikipedia.org/wiki/Mediator_pattern) and [Observer](https://en.wikipedia.org/wiki/Observer_pattern) pattern event library.
 
@@ -6,11 +8,11 @@ A [Mediator](https://en.wikipedia.org/wiki/Mediator_pattern) and [Observer](http
 
 1. Add the dependency to your `shard.yml`:
 
-   ```yaml
-   dependencies:
-     event-dispatcher:
-       github: athena-framework/event-dispatcher
-   ```
+```yaml
+dependencies:
+  athena-event_dispatcher:
+    github: athena-framework/event-dispatcher
+```
 
 2. Run `shards install`
 

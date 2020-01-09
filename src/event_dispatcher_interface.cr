@@ -1,5 +1,5 @@
-# Base class of an event dispatcher.  Defines how dispatchers should be implemented.
-abstract class Athena::EventDispatcher::EventDispatcherInterface
+# Base type of an event dispatcher.  Defines how dispatchers should be implemented.
+module Athena::EventDispatcher::EventDispatcherInterface
   # Adds the provided *listener* as a listener for *event*, optionally with the provided *priority*.
   abstract def add_listener(event : AED::Event.class, listener : AED::EventListenerType, priority : Int32) : Nil
 

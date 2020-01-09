@@ -1,2 +1,2 @@
 require "spec"
-require "../src/event-dispatcher"
+require "../src/athena-event_dispatcher"
