@@ -1,5 +1,6 @@
 # Event Dispatcher
-[![Build Status](https://img.shields.io/github/workflow/status/athena-framework/event-dispatcher/CI)
+
+[![Build Status](https://img.shields.io/github/workflow/status/athena-framework/event-dispatcher/CI)](https://github.com/athena-framework/event-dispatcher/actions)
 [![Latest release](https://img.shields.io/github/release/athena-framework/event-dispatcher.svg?style=flat-square)](https://github.com/athena-framework/event-dispatcher/releases)
 
 A [Mediator](https://en.wikipedia.org/wiki/Mediator_pattern) and [Observer](https://en.wikipedia.org/wiki/Observer_pattern) pattern event library.
