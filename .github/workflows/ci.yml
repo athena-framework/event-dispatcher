@@ -6,6 +6,8 @@ on:
       - '*/*'
       -  '*'
       - '!master'
+  schedule:
+    - cron: '0 21 * * *'
 
 jobs:
   check_format:
@@ -33,7 +35,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Specs
-        run: crystal spec --warnings all --error-on-warnings
+        run: crystal spec --order random --error-on-warnings
   test_nightly:
     runs-on: ubuntu-latest
     container:
@@ -41,4 +43,4 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Specs
-        run: crystal spec --warnings all --error-on-warnings
+        run: crystal spec --order random --error-on-warnings
