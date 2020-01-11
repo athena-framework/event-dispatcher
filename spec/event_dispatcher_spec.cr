@@ -12,7 +12,9 @@ end
 class NoListenerEvent < AED::Event
 end
 
-struct OtherTestListener < AED::Listener
+struct OtherTestListener
+  include AED::EventListenerInterface
+
   def self.subscribed_events : AED::SubscribedEvents
     AED::SubscribedEvents{
       TestEvent => 12,
@@ -26,7 +28,9 @@ struct OtherTestListener < AED::Listener
   end
 end
 
-struct TestListener < AED::Listener
+struct TestListener
+  include AED::EventListenerInterface
+
   def self.subscribed_events : AED::SubscribedEvents
     AED::SubscribedEvents{
       TestEvent => 0,
@@ -46,7 +50,7 @@ describe AED::EventDispatcher do
   describe "#add_listener" do
     describe Proc do
       it "should add the provided proc as a listener" do
-        dispatcher = AED::EventDispatcher.new [] of AED::Listener
+        dispatcher = AED::EventDispatcher.new [] of AED::EventListenerInterface
 
         dispatcher.has_listeners?(FakeEvent).should be_false
 
@@ -58,9 +62,9 @@ describe AED::EventDispatcher do
       end
     end
 
-    describe AED::Listener do
+    describe AED::EventListenerInterface do
       it "should add the provided listener" do
-        dispatcher = AED::EventDispatcher.new [] of AED::Listener
+        dispatcher = AED::EventDispatcher.new [] of AED::EventListenerInterface
 
         dispatcher.has_listeners?(TestEvent).should be_false
 
@@ -135,7 +139,7 @@ describe AED::EventDispatcher do
           end
         end
 
-        describe AED::Listener do
+        describe AED::EventListenerInterface do
           it "should resort the listeners" do
             dispatcher = AED::EventDispatcher.new
 
@@ -208,7 +212,7 @@ describe AED::EventDispatcher do
 
       describe "and there are some listening" do
         it "should return false" do
-          AED::EventDispatcher.new([] of AED::Listener).has_listeners?.should be_false
+          AED::EventDispatcher.new([] of AED::EventListenerInterface).has_listeners?.should be_false
         end
       end
     end
@@ -235,7 +239,7 @@ describe AED::EventDispatcher do
   end
 
   describe "#remove_listener" do
-    describe AED::Listener.class do
+    describe AED::EventListenerInterface.class do
       it "should remove the listeners of the given type off the event" do
         dispatcher = AED::EventDispatcher.new [TestListener.new]
 
@@ -251,7 +255,7 @@ describe AED::EventDispatcher do
       it "should remove the listeners procs off the given event" do
         listener = AED.create_listener(FakeEvent) { }
 
-        dispatcher = AED::EventDispatcher.new [] of AED::Listener
+        dispatcher = AED::EventDispatcher.new [] of AED::EventListenerInterface
 
         dispatcher.add_listener FakeEvent, listener
 
@@ -263,7 +267,7 @@ describe AED::EventDispatcher do
       end
     end
 
-    describe AED::Listener do
+    describe AED::EventListenerInterface do
       it "should remove the listeners based on a listener instance" do
         listener = TestListener.new
 

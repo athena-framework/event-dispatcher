@@ -6,7 +6,7 @@ alias AED = Athena::EventDispatcher
 # A [Mediator](https://en.wikipedia.org/wiki/Mediator_pattern) and [Observer](https://en.wikipedia.org/wiki/Observer_pattern)
 # pattern event library.
 #
-# `Athena::EventDispatcher` or, `AED` for short, allows defining instance methods on `Listener` structs (observers) that will be executed
+# `Athena::EventDispatcher` or, `AED` for short, allows defining instance methods on `EventListenerInterface` types (observers) that will be executed
 # when an `Event` is dispatched via the `EventDispatcher` (mediator).
 #
 # All events are registered with an `EventDispatcher` at compile time.  While the recommended usage involves using
@@ -34,7 +34,9 @@ alias AED = Athena::EventDispatcher
 # end
 #
 # # Create a listener.
-# struct ExceptionListener < AED::Listener
+# struct ExceptionListener
+#   include AED::EventListenerInterface
+#
 #   # Define what events `self` is listening on as well as their priorities.
 #   #
 #   # The higher the priority the sooner that specific listener is executed.
@@ -81,13 +83,13 @@ alias AED = Athena::EventDispatcher
 module Athena::EventDispatcher
   VERSION = "0.1.0"
 
-  # The possible types an event listener can be.  `AED::Listener` instances use `#call`
+  # The possible types an event listener can be.  `AED::EventListenerInterface` instances use `#call`
   # in order to keep a common interface with the `Proc` based listeners.
-  alias EventListenerType = Listener | Proc(Event, EventDispatcherInterface, Nil)
+  alias EventListenerType = EventListenerInterface | Proc(Event, EventDispatcherInterface, Nil)
 
-  # The mapping of the `AED::Event` and the priority a `AED::Listener` is listening on.
+  # The mapping of the `AED::Event` and the priority a `AED::EventListenerInterface` is listening on.
   #
-  # See `AED::Listener`.
+  # See `AED::EventListenerInterface`.
   alias SubscribedEvents = Hash(AED::Event.class, Int32)
 
   # Wraps an `EventListenerType` in order to keep track of its `priority`.

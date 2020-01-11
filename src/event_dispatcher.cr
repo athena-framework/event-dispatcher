@@ -1,6 +1,6 @@
 require "./event_dispatcher_interface"
 require "./event"
-require "./listener"
+require "./event_listener_interface"
 
 class Athena::EventDispatcher::EventDispatcher
   include Athena::EventDispatcher::EventDispatcherInterface
@@ -15,7 +15,7 @@ class Athena::EventDispatcher::EventDispatcher
   #
   # This overload is mainly intended for DI or to manually
   # configure the listeners that should be listened on.
-  def initialize(listeners : Array(AED::Listener))
+  def initialize(listeners : Array(AED::EventListenerInterface))
     # Initialize the event_hash, with a default size of the number of event subclasses. Add one to account for `Event` itself.
     @events = Hash(AED::Event.class, Array(AED::EventListener)).new {{Event.all_subclasses.size + 1}} { raise "Bug: Accessed missing event type" }
 
@@ -24,7 +24,7 @@ class Athena::EventDispatcher::EventDispatcher
       {% raise "Event '#{event.name}' cannot be generic" if event.type_vars.size >= 1 %}
       {% unless event.abstract? %}
         # Initialize each event to an empty array with a default size of the number of total listeners
-        @events[{{event.id}}] = Array(AED::EventListener).new {{AED::Listener.all_subclasses.size}}
+        @events[{{event.id}}] = Array(AED::EventListener).new {{AED::EventListenerInterface.includers.size}}
       {% end %}
     {% end %}
 
@@ -36,9 +36,9 @@ class Athena::EventDispatcher::EventDispatcher
   end
 
   # Initializes `self` automatically via macros.  This overload is mainly intended for
-  # use cases where the listener structs don't have any dependencies, and/or all listeners should listen.
+  # use cases where the listener types don't have any dependencies, and/or all listeners should listen.
   def self.new
-    new {{AED::Listener.subclasses.map { |listener| "#{listener.id}.new".id }}}
+    new {{AED::EventListenerInterface.includers.map { |listener| "#{listener.id}.new".id }}}
   end
 
   # :inherit:
@@ -72,7 +72,7 @@ class Athena::EventDispatcher::EventDispatcher
   end
 
   # :inherit:
-  def listener_priority(event : AED::Event.class, listener : AED::Listener.class) : Int32?
+  def listener_priority(event : AED::Event.class, listener : AED::EventListenerInterface.class) : Int32?
     return nil unless has_listeners? event
 
     @events[event].find(&.listener.class.==(listener)).try &.priority
@@ -86,7 +86,7 @@ class Athena::EventDispatcher::EventDispatcher
   end
 
   # :inherit:
-  def remove_listener(event : AED::Event.class, listener : AED::Listener.class) : Nil
+  def remove_listener(event : AED::Event.class, listener : AED::EventListenerInterface.class) : Nil
     @events[event].reject! &.listener.class.==(listener)
   end
 
