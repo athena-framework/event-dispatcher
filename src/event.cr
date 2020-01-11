@@ -7,6 +7,9 @@ require "./stoppable_event"
 #
 # Can be inherited from to include information about the event.
 #
+# NOTE: If one event inherits from another, and both are being used within a listener; the child event's handler would be executed twice since its type is compatible with the parent.
+# Either use composition versus inheritance for sharing common logic between events, or add an explicit type check in the listener.
+#
 # ```
 # # Define a custom event
 # class ExceptionEvent < AED::Event

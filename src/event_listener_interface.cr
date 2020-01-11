@@ -1,6 +1,6 @@
-# Base for `struct` based event listeners.
+# Interface for event listeners.
 #
-# Listeners are defined by inheriting from this class.
+# Listeners are defined by including this module.
 #
 # An event can be listened for by defining `#call(event : AED::Event, dispatcher : AED::EventDispatcherInterface) : Nil`.
 # The first argument should be typed to the specific `AED::Event` instance that the method should listen on.  Multiple methods can be defined to handle
@@ -9,11 +9,13 @@
 # Children must also define `self.subscribed_events : AED::SubscribedEvents` that represents the events that `self`'s methods
 # are listening on.  The value of the hash is the priority of the listener.  The higher the value the sooner that listener method gets executed.
 #
-# Children can also define initializers if external dependencies are required for handling the event.  However, `AED::EventDispatcher#new(listeners : Array(Listener))`
+# Children can also define initializers if external dependencies are required for handling the event.  However, `AED::EventDispatcher#new(listeners : Array(EventListenerInterface))`
 # must be used to register `self`, either with DI, or provided manually.
 #
 # ```
-# struct TestListener < AED::Listener
+# struct TestListener
+#   include AED::EventListenerInterface
+#
 #   def self.subscribed_events : AED::SubscribedEvents
 #     AED::SubscribedEvents{
 #       HttpRequestEvent => 0,
@@ -30,7 +32,7 @@
 #   end
 # end
 # ```
-abstract struct Athena::EventDispatcher::Listener
+module Athena::EventDispatcher::EventListenerInterface
   # Returns the `AED::Event`s that `self` is listening on, along with
   # the listener priority of each event.
   #
