@@ -60,7 +60,7 @@ alias AED = Athena::EventDispatcher
 # # New up an `AED::EventDispatcher`, using `AED::EventDispatcher#new`.
 # # This overload automatically registers listeners using macros.
 # #
-# # See also `AED::EventDispatcher#new(listeners : Array(Listener))` for a more manual/DI friendly initializer.
+# # See also `AED::EventDispatcher#new(listeners : Array(EventListenerInterface))` for a more manual/DI friendly initializer.
 # dispatcher = AED::EventDispatcher.new
 #
 # # Instantiate our custom event.

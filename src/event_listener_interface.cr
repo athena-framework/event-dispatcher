@@ -6,10 +6,10 @@
 # The first argument should be typed to the specific `AED::Event` instance that the method should listen on.  Multiple methods can be defined to handle
 # multiple events within the same listener.
 #
-# Children must also define `self.subscribed_events : AED::SubscribedEvents` that represents the events that `self`'s methods
+# Implementors must also define `self.subscribed_events : AED::SubscribedEvents` that represents the events that `self`'s methods
 # are listening on.  The value of the hash is the priority of the listener.  The higher the value the sooner that listener method gets executed.
 #
-# Children can also define initializers if external dependencies are required for handling the event.  However, `AED::EventDispatcher#new(listeners : Array(EventListenerInterface))`
+# Implementors can also define initializers if external dependencies are required for handling the event.  However, `AED::EventDispatcher#new(listeners : Array(EventListenerInterface))`
 # must be used to register `self`, either with DI, or provided manually.
 #
 # ```
@@ -36,12 +36,12 @@ module Athena::EventDispatcher::EventListenerInterface
   # Returns the `AED::Event`s that `self` is listening on, along with
   # the listener priority of each event.
   #
-  # Children should overide this with the events it should listen on.
+  # Implementors should overide this with the events it should listen on.
   def self.subscribed_events : AED::SubscribedEvents
     AED::SubscribedEvents.new
   end
 
-  # Example method for listening on a specific *event*.  Children can define multiple of these,
+  # Example method for listening on a specific *event*.  Implementors can define multiple of these,
   # assuming each one listens on a different `AED::Event` type.
   #
   # Internally this method is used to make the compiler happy, in practice it should never get called.
