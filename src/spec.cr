@@ -6,7 +6,7 @@
 #
 # ```
 # # This also requires "spec".
-# require "athena-event-dispatcher/spec"
+# require "athena-event_dispatcher/spec"
 # ```
 module Athena::EventDispatcher::Spec
   # Test implementation of `AED::EventDispatcherInterface` that keeps track of the events that were dispatched.
