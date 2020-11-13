@@ -15,7 +15,7 @@ jobs:
         run: apk add --update rsync
       - uses: actions/checkout@v2
       - name: Build
-        run: crystal docs
+        run: crystal docs src/athena-event_dispatcher.cr src/spec.cr
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.6.1
         with:
