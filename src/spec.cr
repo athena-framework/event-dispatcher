@@ -1,3 +1,5 @@
+require "spec"
+
 # A set of testing utilities/types to aid in testing `Athena::EventDispatcher` related types.
 #
 # ### Getting Started
