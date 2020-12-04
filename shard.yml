@@ -1,8 +1,8 @@
 name: athena-event_dispatcher
 
-version: 0.1.1
+version: 0.1.2
 
-crystal: 0.32.0
+crystal: '>= 0.35.0'
 
 license: MIT
 
@@ -14,7 +14,7 @@ description: |
   A Mediator and Observer pattern event library
 
 authors:
-  - Blacksmoke16 <Blacksmoke16@eve.tools>
+  - George Dietrich <george@dietrich.app>
 
 development_dependencies:
   ameba:
