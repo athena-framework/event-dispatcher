@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.34.0">
+<meta name="crystal_docs.project_version" content="master">
+<meta name="crystal_docs.project_name" content="athena-event_dispatcher">
+
+
+<link href="../../../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../../js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="athena-event_dispatcher">
+  <title>Athena::EventDispatcher::Spec::TracableEventDispatcher - athena-event_dispatcher master</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../../../";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../../../index.html">
+          athena-event_dispatcher
+        </a>
+      </h1>
+
+      <span class="project-version">
+        master
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class=" " data-id="athena-event_dispatcher/AED" data-name="aed">
+      <a href="../../../AED.html">AED</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="athena-event_dispatcher/Athena" data-name="athena">
+      <a href="../../../Athena.html">Athena</a>
+      
+        <ul>
+  
+  <li class="parent open current" data-id="athena-event_dispatcher/Athena/EventDispatcher" data-name="athena::eventdispatcher">
+      <a href="../../../Athena/EventDispatcher.html">EventDispatcher</a>
+      
+        <ul>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/Event" data-name="athena::eventdispatcher::event">
+      <a href="../../../Athena/EventDispatcher/Event.html">Event</a>
+      
+    </li>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/EventDispatcher" data-name="athena::eventdispatcher::eventdispatcher">
+      <a href="../../../Athena/EventDispatcher/EventDispatcher.html">EventDispatcher</a>
+      
+    </li>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/EventDispatcherInterface" data-name="athena::eventdispatcher::eventdispatcherinterface">
+      <a href="../../../Athena/EventDispatcher/EventDispatcherInterface.html">EventDispatcherInterface</a>
+      
+    </li>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/EventListener" data-name="athena::eventdispatcher::eventlistener">
+      <a href="../../../Athena/EventDispatcher/EventListener.html">EventListener</a>
+      
+    </li>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/EventListenerInterface" data-name="athena::eventdispatcher::eventlistenerinterface">
+      <a href="../../../Athena/EventDispatcher/EventListenerInterface.html">EventListenerInterface</a>
+      
+    </li>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/EventListenerType" data-name="athena::eventdispatcher::eventlistenertype">
+      <a href="../../../Athena/EventDispatcher/EventListenerType.html">EventListenerType</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="athena-event_dispatcher/Athena/EventDispatcher/Spec" data-name="athena::eventdispatcher::spec">
+      <a href="../../../Athena/EventDispatcher/Spec.html">Spec</a>
+      
+        <ul>
+  
+  <li class=" current" data-id="athena-event_dispatcher/Athena/EventDispatcher/Spec/TracableEventDispatcher" data-name="athena::eventdispatcher::spec::tracableeventdispatcher">
+      <a href="../../../Athena/EventDispatcher/Spec/TracableEventDispatcher.html">TracableEventDispatcher</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/StoppableEvent" data-name="athena::eventdispatcher::stoppableevent">
+      <a href="../../../Athena/EventDispatcher/StoppableEvent.html">StoppableEvent</a>
+      
+    </li>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/SubscribedEvents" data-name="athena::eventdispatcher::subscribedevents">
+      <a href="../../../Athena/EventDispatcher/SubscribedEvents.html">SubscribedEvents</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Athena::EventDispatcher::Spec::TracableEventDispatcher
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../../Athena/EventDispatcher/Spec/TracableEventDispatcher.html">Athena::EventDispatcher::Spec::TracableEventDispatcher</a></li><li class="superclass"><a href="../../../Athena/EventDispatcher/EventDispatcher.html">Athena::EventDispatcher::EventDispatcher</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>Test implementation of <code><a href="../../../Athena/EventDispatcher/EventDispatcherInterface.html">AED::EventDispatcherInterface</a></code> that keeps track of the events that were dispatched.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/athena-framework/event-dispatcher/blob/143c16dfaac1b0fb0cf4c8b0be2d84377a143b32/src/spec.cr#L15" target="_blank">
+        spec.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#dispatch(event:AED::Event):Nil-instance-method" class="signature"><strong>#dispatch</strong>(event : AED::Event) : Nil</a>
+        
+          <div class="summary"><p>:inherit:</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#emitted_events:Array(AED::Event.class)-instance-method" class="signature"><strong>#emitted_events</strong> : Array(<span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+  <h3>Instance methods inherited from class <code><a href="../../../Athena/EventDispatcher/EventDispatcher.html">Athena::EventDispatcher::EventDispatcher</a></code></h3>
+  
+  
+    <a href="../../../Athena/EventDispatcher/EventDispatcher.html#add_listener(event:AED::Event.class,listener:AED::EventListenerType,priority:Int32=0):Nil-instance-method" class="tooltip">
+      <span>add_listener(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>, listener : AED::EventListenerType, priority : Int32 = <span class="n">0</span>) : Nil</span>
+    add_listener</a>, 
+    
+  
+    <a href="../../../Athena/EventDispatcher/EventDispatcher.html#dispatch(event:AED::Event):Nil-instance-method" class="tooltip">
+      <span>dispatch(event : AED::Event) : Nil</span>
+    dispatch</a>, 
+    
+  
+    <a href="../../../Athena/EventDispatcher/EventDispatcher.html#has_listeners?(event:AED::Event.class?=nil):Bool-instance-method" class="tooltip">
+      <span>has_listeners?(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>? = <span class="n">nil</span>) : Bool</span>
+    has_listeners?</a>, 
+    
+  
+    <a href="../../../Athena/EventDispatcher/EventDispatcher.html#listener_priority(event:AED::Event.class,listener:AED::EventListenerInterface.class):Int32?-instance-method" class="tooltip">
+      <span>listener_priority(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>, listener : <span class="t">AED</span><span class="t">::</span><span class="t">EventListenerInterface</span>.<span class="k">class</span>) : Int32?</span>
+    listener_priority</a>, 
+    
+  
+    <a href="../../../Athena/EventDispatcher/EventDispatcher.html#listeners(event:AED::Event.class?=nil):Array(AED::EventListener)-instance-method" class="tooltip">
+      <span>listeners(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>? = <span class="n">nil</span>) : Array(AED::EventListener)</span>
+    listeners</a>, 
+    
+  
+    <a href="../../../Athena/EventDispatcher/EventDispatcher.html#remove_listener(event:AED::Event.class,listener:AED::EventListenerInterface.class):Nil-instance-method" class="tooltip">
+      <span>remove_listener(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>, listener : <span class="t">AED</span><span class="t">::</span><span class="t">EventListenerInterface</span>.<span class="k">class</span>) : Nil<br/>remove_listener(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>, listener : AED::EventListenerType) : Nil</span>
+    remove_listener</a>
+    
+  
+
+
+    
+
+  <h3>Constructor methods inherited from class <code><a href="../../../Athena/EventDispatcher/EventDispatcher.html">Athena::EventDispatcher::EventDispatcher</a></code></h3>
+  
+  
+    <a href="../../../Athena/EventDispatcher/EventDispatcher.html#new(listeners:Array(AED::EventListenerInterface))-class-method" class="tooltip">
+      <span>new(listeners : Array(AED::EventListenerInterface))<br/>new</span>
+    new</a>
+    
+  
+
+
+    
+
+
+  
+    
+
+  <h3>Instance methods inherited from module <code><a href="../../../Athena/EventDispatcher/EventDispatcherInterface.html">Athena::EventDispatcher::EventDispatcherInterface</a></code></h3>
+  
+  
+    <a href="../../../Athena/EventDispatcher/EventDispatcherInterface.html#add_listener(event:AED::Event.class,listener:AED::EventListenerType,priority:Int32):Nil-instance-method" class="tooltip">
+      <span>add_listener(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>, listener : AED::EventListenerType, priority : Int32) : Nil</span>
+    add_listener</a>, 
+    
+  
+    <a href="../../../Athena/EventDispatcher/EventDispatcherInterface.html#dispatch(event:AED::Event):Nil-instance-method" class="tooltip">
+      <span>dispatch(event : AED::Event) : Nil</span>
+    dispatch</a>, 
+    
+  
+    <a href="../../../Athena/EventDispatcher/EventDispatcherInterface.html#has_listeners?(event:AED::Event.class?):Bool-instance-method" class="tooltip">
+      <span>has_listeners?(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>?) : Bool</span>
+    has_listeners?</a>, 
+    
+  
+    <a href="../../../Athena/EventDispatcher/EventDispatcherInterface.html#listener_priority(event:AED::Event.class,listener:AED::EventListenerInterface.class):Int32?-instance-method" class="tooltip">
+      <span>listener_priority(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>, listener : <span class="t">AED</span><span class="t">::</span><span class="t">EventListenerInterface</span>.<span class="k">class</span>) : Int32?</span>
+    listener_priority</a>, 
+    
+  
+    <a href="../../../Athena/EventDispatcher/EventDispatcherInterface.html#listeners(event:AED::Event.class?):Array(AED::EventListener)-instance-method" class="tooltip">
+      <span>listeners(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>?) : Array(AED::EventListener)</span>
+    listeners</a>, 
+    
+  
+    <a href="../../../Athena/EventDispatcher/EventDispatcherInterface.html#remove_listener(event:AED::Event.class,listener:AED::EventListenerInterface.class):Nil-instance-method" class="tooltip">
+      <span>remove_listener(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>, listener : <span class="t">AED</span><span class="t">::</span><span class="t">EventListenerInterface</span>.<span class="k">class</span>) : Nil<br/>remove_listener(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>, listener : AED::EventListenerType) : Nil</span>
+    remove_listener</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>
+
+        <a class="method-permalink" href="#new-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/athena-framework/event-dispatcher/blob/143c16dfaac1b0fb0cf4c8b0be2d84377a143b32/src/spec.cr#L18" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="dispatch(event:AED::Event):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>dispatch</strong>(event : <a href="../../../Athena/EventDispatcher/Event.html">AED::Event</a>) : Nil
+
+        <a class="method-permalink" href="#dispatch(event:AED::Event):Nil-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+            <div class="doc-inherited">
+              Description copied from class <a href="../../../Athena/EventDispatcher/EventDispatcher.html">Athena::EventDispatcher::EventDispatcher</a>
+            </div>
+          
+          <p>:inherit:</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/athena-framework/event-dispatcher/blob/143c16dfaac1b0fb0cf4c8b0be2d84377a143b32/src/spec.cr#L22" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="emitted_events:Array(AED::Event.class)-instance-method">
+      <div class="signature">
+        
+        def <strong>emitted_events</strong> : Array(<span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>)
+
+        <a class="method-permalink" href="#emitted_events:Array(AED::Event.class)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/athena-framework/event-dispatcher/blob/143c16dfaac1b0fb0cf4c8b0be2d84377a143b32/src/spec.cr#L16" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

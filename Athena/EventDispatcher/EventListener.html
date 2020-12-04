@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.34.0">
+<meta name="crystal_docs.project_version" content="master">
+<meta name="crystal_docs.project_name" content="athena-event_dispatcher">
+
+
+<link href="../../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="athena-event_dispatcher">
+  <title>Athena::EventDispatcher::EventListener - athena-event_dispatcher master</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../../";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../../index.html">
+          athena-event_dispatcher
+        </a>
+      </h1>
+
+      <span class="project-version">
+        master
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class=" " data-id="athena-event_dispatcher/AED" data-name="aed">
+      <a href="../../AED.html">AED</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="athena-event_dispatcher/Athena" data-name="athena">
+      <a href="../../Athena.html">Athena</a>
+      
+        <ul>
+  
+  <li class="parent open current" data-id="athena-event_dispatcher/Athena/EventDispatcher" data-name="athena::eventdispatcher">
+      <a href="../../Athena/EventDispatcher.html">EventDispatcher</a>
+      
+        <ul>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/Event" data-name="athena::eventdispatcher::event">
+      <a href="../../Athena/EventDispatcher/Event.html">Event</a>
+      
+    </li>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/EventDispatcher" data-name="athena::eventdispatcher::eventdispatcher">
+      <a href="../../Athena/EventDispatcher/EventDispatcher.html">EventDispatcher</a>
+      
+    </li>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/EventDispatcherInterface" data-name="athena::eventdispatcher::eventdispatcherinterface">
+      <a href="../../Athena/EventDispatcher/EventDispatcherInterface.html">EventDispatcherInterface</a>
+      
+    </li>
+  
+  <li class=" current" data-id="athena-event_dispatcher/Athena/EventDispatcher/EventListener" data-name="athena::eventdispatcher::eventlistener">
+      <a href="../../Athena/EventDispatcher/EventListener.html">EventListener</a>
+      
+    </li>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/EventListenerInterface" data-name="athena::eventdispatcher::eventlistenerinterface">
+      <a href="../../Athena/EventDispatcher/EventListenerInterface.html">EventListenerInterface</a>
+      
+    </li>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/EventListenerType" data-name="athena::eventdispatcher::eventlistenertype">
+      <a href="../../Athena/EventDispatcher/EventListenerType.html">EventListenerType</a>
+      
+    </li>
+  
+  <li class="parent " data-id="athena-event_dispatcher/Athena/EventDispatcher/Spec" data-name="athena::eventdispatcher::spec">
+      <a href="../../Athena/EventDispatcher/Spec.html">Spec</a>
+      
+        <ul>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/Spec/TracableEventDispatcher" data-name="athena::eventdispatcher::spec::tracableeventdispatcher">
+      <a href="../../Athena/EventDispatcher/Spec/TracableEventDispatcher.html">TracableEventDispatcher</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/StoppableEvent" data-name="athena::eventdispatcher::stoppableevent">
+      <a href="../../Athena/EventDispatcher/StoppableEvent.html">StoppableEvent</a>
+      
+    </li>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/SubscribedEvents" data-name="athena::eventdispatcher::subscribedevents">
+      <a href="../../Athena/EventDispatcher/SubscribedEvents.html">SubscribedEvents</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">struct</span> Athena::EventDispatcher::EventListener
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Athena/EventDispatcher/EventListener.html">Athena::EventDispatcher::EventListener</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>Wraps an <code><a href="../../Athena/EventDispatcher/EventListenerType.html">EventListenerType</a></code> in order to keep track of its <code><a href="../../Athena/EventDispatcher/EventListener.html#priority:Int32-instance-method">#priority</a></code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/athena-framework/event-dispatcher/blob/143c16dfaac1b0fb0cf4c8b0be2d84377a143b32/src/athena-event_dispatcher.cr#L96" target="_blank">
+        athena-event_dispatcher.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new(listener:EventListenerType,priority:Int32=0)-class-method" class="signature"><strong>.new</strong>(listener : EventListenerType, priority : Int32 = <span class="n">0</span>)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#listener:EventListenerType-instance-method" class="signature"><strong>#listener</strong> : EventListenerType</a>
+        
+          <div class="summary"><p>The wrapped <code><a href="../../Athena/EventDispatcher/EventListenerType.html">EventListenerType</a></code> instance.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#priority:Int32-instance-method" class="signature"><strong>#priority</strong> : Int32</a>
+        
+          <div class="summary"><p>The priority of the <code><a href="../../Athena/EventDispatcher/EventListenerType.html">EventListenerType</a></code> instance.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(listener:EventListenerType,priority:Int32=0)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(listener : <a href="../../Athena/EventDispatcher/EventListenerType.html">EventListenerType</a>, priority : Int32 = <span class="n">0</span>)
+
+        <a class="method-permalink" href="#new(listener:EventListenerType,priority:Int32=0)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/athena-framework/event-dispatcher/blob/143c16dfaac1b0fb0cf4c8b0be2d84377a143b32/src/athena-event_dispatcher.cr#L108" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="listener:EventListenerType-instance-method">
+      <div class="signature">
+        
+        def <strong>listener</strong> : <a href="../../Athena/EventDispatcher/EventListenerType.html">EventListenerType</a>
+
+        <a class="method-permalink" href="#listener:EventListenerType-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>The wrapped <code><a href="../../Athena/EventDispatcher/EventListenerType.html">EventListenerType</a></code> instance.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/athena-framework/event-dispatcher/blob/143c16dfaac1b0fb0cf4c8b0be2d84377a143b32/src/athena-event_dispatcher.cr#L101" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="priority:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>priority</strong> : Int32
+
+        <a class="method-permalink" href="#priority:Int32-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>The priority of the <code><a href="../../Athena/EventDispatcher/EventListenerType.html">EventListenerType</a></code> instance.</p>
+
+<p>The higher the <code><a href="../../Athena/EventDispatcher/EventListener.html#priority:Int32-instance-method">#priority</a></code> the sooner <code><a href="../../Athena/EventDispatcher/EventListener.html#listener:EventListenerType-instance-method">#listener</a></code> will be executed.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/athena-framework/event-dispatcher/blob/143c16dfaac1b0fb0cf4c8b0be2d84377a143b32/src/athena-event_dispatcher.cr#L106" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

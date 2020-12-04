@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.34.0">
+<meta name="crystal_docs.project_version" content="master">
+<meta name="crystal_docs.project_name" content="athena-event_dispatcher">
+
+
+<link href="../../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="athena-event_dispatcher">
+  <title>Athena::EventDispatcher::EventDispatcherInterface - athena-event_dispatcher master</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../../";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../../index.html">
+          athena-event_dispatcher
+        </a>
+      </h1>
+
+      <span class="project-version">
+        master
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class=" " data-id="athena-event_dispatcher/AED" data-name="aed">
+      <a href="../../AED.html">AED</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="athena-event_dispatcher/Athena" data-name="athena">
+      <a href="../../Athena.html">Athena</a>
+      
+        <ul>
+  
+  <li class="parent open current" data-id="athena-event_dispatcher/Athena/EventDispatcher" data-name="athena::eventdispatcher">
+      <a href="../../Athena/EventDispatcher.html">EventDispatcher</a>
+      
+        <ul>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/Event" data-name="athena::eventdispatcher::event">
+      <a href="../../Athena/EventDispatcher/Event.html">Event</a>
+      
+    </li>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/EventDispatcher" data-name="athena::eventdispatcher::eventdispatcher">
+      <a href="../../Athena/EventDispatcher/EventDispatcher.html">EventDispatcher</a>
+      
+    </li>
+  
+  <li class=" current" data-id="athena-event_dispatcher/Athena/EventDispatcher/EventDispatcherInterface" data-name="athena::eventdispatcher::eventdispatcherinterface">
+      <a href="../../Athena/EventDispatcher/EventDispatcherInterface.html">EventDispatcherInterface</a>
+      
+    </li>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/EventListener" data-name="athena::eventdispatcher::eventlistener">
+      <a href="../../Athena/EventDispatcher/EventListener.html">EventListener</a>
+      
+    </li>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/EventListenerInterface" data-name="athena::eventdispatcher::eventlistenerinterface">
+      <a href="../../Athena/EventDispatcher/EventListenerInterface.html">EventListenerInterface</a>
+      
+    </li>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/EventListenerType" data-name="athena::eventdispatcher::eventlistenertype">
+      <a href="../../Athena/EventDispatcher/EventListenerType.html">EventListenerType</a>
+      
+    </li>
+  
+  <li class="parent " data-id="athena-event_dispatcher/Athena/EventDispatcher/Spec" data-name="athena::eventdispatcher::spec">
+      <a href="../../Athena/EventDispatcher/Spec.html">Spec</a>
+      
+        <ul>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/Spec/TracableEventDispatcher" data-name="athena::eventdispatcher::spec::tracableeventdispatcher">
+      <a href="../../Athena/EventDispatcher/Spec/TracableEventDispatcher.html">TracableEventDispatcher</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/StoppableEvent" data-name="athena::eventdispatcher::stoppableevent">
+      <a href="../../Athena/EventDispatcher/StoppableEvent.html">StoppableEvent</a>
+      
+    </li>
+  
+  <li class=" " data-id="athena-event_dispatcher/Athena/EventDispatcher/SubscribedEvents" data-name="athena::eventdispatcher::subscribedevents">
+      <a href="../../Athena/EventDispatcher/SubscribedEvents.html">SubscribedEvents</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">module</span> Athena::EventDispatcher::EventDispatcherInterface
+
+</h1>
+
+
+
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>Base type of an event dispatcher.  Defines how dispatchers should be implemented.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="direct-including-types" class="anchor" href="#direct-including-types">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Direct including types
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type"><a href="../../Athena/EventDispatcher/EventDispatcher.html">Athena::EventDispatcher::EventDispatcher</a></li>
+    
+  </ul>
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/athena-framework/event-dispatcher/blob/143c16dfaac1b0fb0cf4c8b0be2d84377a143b32/src/event_dispatcher_interface.cr#L2" target="_blank">
+        event_dispatcher_interface.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#add_listener(event:AED::Event.class,listener:AED::EventListenerType,priority:Int32):Nil-instance-method" class="signature"><strong>#add_listener</strong>(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>, listener : AED::EventListenerType, priority : Int32) : Nil</a>
+        
+          <div class="summary"><p>Adds the provided <em>listener</em> as a listener for <em>event</em>, optionally with the provided <em>priority</em>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#dispatch(event:AED::Event):Nil-instance-method" class="signature"><strong>#dispatch</strong>(event : AED::Event) : Nil</a>
+        
+          <div class="summary"><p>Dispatches <em>event</em> to all listeners registered on <code>self</code> that are listening on that event.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#has_listeners?(event:AED::Event.class?):Bool-instance-method" class="signature"><strong>#has_listeners?</strong>(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>?) : Bool</a>
+        
+          <div class="summary"><p>Returns <code>true</code> if there are any listeners listening on the provided <em>event</em>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#listener_priority(event:AED::Event.class,listener:AED::EventListenerInterface.class):Int32?-instance-method" class="signature"><strong>#listener_priority</strong>(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>, listener : <span class="t">AED</span><span class="t">::</span><span class="t">EventListenerInterface</span>.<span class="k">class</span>) : Int32?</a>
+        
+          <div class="summary"><p>Returns the <em>listener</em> priority for the provided <em>event</em>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#listeners(event:AED::Event.class?):Array(AED::EventListener)-instance-method" class="signature"><strong>#listeners</strong>(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>?) : Array(AED::EventListener)</a>
+        
+          <div class="summary"><p>Returns the listeners listening on the provided <em>event</em>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#remove_listener(event:AED::Event.class,listener:AED::EventListenerInterface.class):Nil-instance-method" class="signature"><strong>#remove_listener</strong>(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>, listener : <span class="t">AED</span><span class="t">::</span><span class="t">EventListenerInterface</span>.<span class="k">class</span>) : Nil</a>
+        
+          <div class="summary"><p>Removes the provided <em>event</em> from the provided <em>listener</em>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#remove_listener(event:AED::Event.class,listener:AED::EventListenerType):Nil-instance-method" class="signature"><strong>#remove_listener</strong>(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>, listener : AED::EventListenerType) : Nil</a>
+        
+          <div class="summary"><p>Removes the provided <em>event</em> from the provided <em>listener</em>.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+</div>
+
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="add_listener(event:AED::Event.class,listener:AED::EventListenerType,priority:Int32):Nil-instance-method">
+      <div class="signature">
+        abstract 
+        def <strong>add_listener</strong>(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>, listener : <a href="../../Athena/EventDispatcher/EventListenerType.html">AED::EventListenerType</a>, priority : Int32) : Nil
+
+        <a class="method-permalink" href="#add_listener(event:AED::Event.class,listener:AED::EventListenerType,priority:Int32):Nil-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Adds the provided <em>listener</em> as a listener for <em>event</em>, optionally with the provided <em>priority</em>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/athena-framework/event-dispatcher/blob/143c16dfaac1b0fb0cf4c8b0be2d84377a143b32/src/event_dispatcher_interface.cr#L4" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="dispatch(event:AED::Event):Nil-instance-method">
+      <div class="signature">
+        abstract 
+        def <strong>dispatch</strong>(event : <a href="../../Athena/EventDispatcher/Event.html">AED::Event</a>) : Nil
+
+        <a class="method-permalink" href="#dispatch(event:AED::Event):Nil-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Dispatches <em>event</em> to all listeners registered on <code>self</code> that are listening on that event.</p>
+
+<p><code><a href="../../Athena/EventDispatcher/EventListenerInterface.html">AED::EventListenerInterface</a></code>'s are executed based on the listener's priority; the higher the value the sooner it gets executed.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/athena-framework/event-dispatcher/blob/143c16dfaac1b0fb0cf4c8b0be2d84377a143b32/src/event_dispatcher_interface.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="has_listeners?(event:AED::Event.class?):Bool-instance-method">
+      <div class="signature">
+        abstract 
+        def <strong>has_listeners?</strong>(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>?) : Bool
+
+        <a class="method-permalink" href="#has_listeners?(event:AED::Event.class?):Bool-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns <code>true</code> if there are any listeners listening on the provided <em>event</em>.
+If no <em>event</em> is provided, returns <code>true</code> if there are <em>ANY</em> listeners registered on <code>self</code>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/athena-framework/event-dispatcher/blob/143c16dfaac1b0fb0cf4c8b0be2d84377a143b32/src/event_dispatcher_interface.cr#L21" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="listener_priority(event:AED::Event.class,listener:AED::EventListenerInterface.class):Int32?-instance-method">
+      <div class="signature">
+        abstract 
+        def <strong>listener_priority</strong>(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>, listener : <span class="t">AED</span><span class="t">::</span><span class="t">EventListenerInterface</span>.<span class="k">class</span>) : Int32?
+
+        <a class="method-permalink" href="#listener_priority(event:AED::Event.class,listener:AED::EventListenerInterface.class):Int32?-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns the <em>listener</em> priority for the provided <em>event</em>.  Returns <code>nil</code> if no listeners are listening on the provided <em>event</em> or
+if <em>listener</em> isn't listening on <em>event</em>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/athena-framework/event-dispatcher/blob/143c16dfaac1b0fb0cf4c8b0be2d84377a143b32/src/event_dispatcher_interface.cr#L17" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="listeners(event:AED::Event.class?):Array(AED::EventListener)-instance-method">
+      <div class="signature">
+        abstract 
+        def <strong>listeners</strong>(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>?) : Array(<a href="../../Athena/EventDispatcher/EventListener.html">AED::EventListener</a>)
+
+        <a class="method-permalink" href="#listeners(event:AED::Event.class?):Array(AED::EventListener)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns the listeners listening on the provided <em>event</em>.
+If no <em>event</em> is provided, returns all listeners.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/athena-framework/event-dispatcher/blob/143c16dfaac1b0fb0cf4c8b0be2d84377a143b32/src/event_dispatcher_interface.cr#L13" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="remove_listener(event:AED::Event.class,listener:AED::EventListenerInterface.class):Nil-instance-method">
+      <div class="signature">
+        abstract 
+        def <strong>remove_listener</strong>(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>, listener : <span class="t">AED</span><span class="t">::</span><span class="t">EventListenerInterface</span>.<span class="k">class</span>) : Nil
+
+        <a class="method-permalink" href="#remove_listener(event:AED::Event.class,listener:AED::EventListenerInterface.class):Nil-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Removes the provided <em>event</em> from the provided <em>listener</em>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/athena-framework/event-dispatcher/blob/143c16dfaac1b0fb0cf4c8b0be2d84377a143b32/src/event_dispatcher_interface.cr#L24" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="remove_listener(event:AED::Event.class,listener:AED::EventListenerType):Nil-instance-method">
+      <div class="signature">
+        abstract 
+        def <strong>remove_listener</strong>(event : <span class="t">AED</span><span class="t">::</span><span class="t">Event</span>.<span class="k">class</span>, listener : <a href="../../Athena/EventDispatcher/EventListenerType.html">AED::EventListenerType</a>) : Nil
+
+        <a class="method-permalink" href="#remove_listener(event:AED::Event.class,listener:AED::EventListenerType):Nil-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Removes the provided <em>event</em> from the provided <em>listener</em>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/athena-framework/event-dispatcher/blob/143c16dfaac1b0fb0cf4c8b0be2d84377a143b32/src/event_dispatcher_interface.cr#L27" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
