@@ -19,7 +19,8 @@ dependencies:
 
 ## Documentation
 
-Everything is documented in the [API Docs](https://athena-framework.github.io/event-dispatcher/Athena/EventDispatcher.html).
+If using the component on its own, checkout the [API documentation](https://athenaframework.org/EventDispatcher).
+If using the component as part of Athena, also checkout the [external documentation](https://athenaframework.org/components/event_dispatcher).
 
 ## Contributing
 
